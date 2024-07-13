@@ -14,4 +14,5 @@
         {{ end }}
     </aside>
 	<div id="remark42"></div>
+	{{ partial (printf "comments/provider/%s" .Site.Params.comments.provider) . }}
 {{ end }}
