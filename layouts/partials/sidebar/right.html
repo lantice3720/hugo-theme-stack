@@ -16,4 +16,6 @@
 	<div id="remark42">asdf</div>
 	
 {{ end }}
-{{ partial (printf "comments/provider/%s" .Site.Params.comments.provider) . }}
+{{ if not (eq .Params.comments false) }}
+        {{ partial "comments/include" . }}
+{{ end }}
