@@ -1,7 +1,8 @@
 {{- $scope := default "homepage" .Scope -}}
 {{- $context := .Context -}}
-{{- with (index .Context.Site.Params.widgets $scope) -}}
+
     <aside class="sidebar right-sidebar sticky">
+		{{- with (index .Context.Site.Params.widgets $scope) -}}
         {{ range $widget := . }}
             {{ if templates.Exists (printf "partials/widget/%s.html" .type) }}
                 <!-- Ensure that the `params` is not nil -->
@@ -12,10 +13,11 @@
                 {{ warnf "Widget %s not found" .type }}
             {{ end }}
         {{ end }}
+		{{ end }}
+		{{ if not (eq .Params.comments false) }}
+			{{ partial "comments/include" . }}
+		{{ end }}
     </aside>
-	<div id="remark42">asdf</div>
 	
-{{ end }}
-{{ if not (eq .Params.comments false) }}
-        {{ partial "comments/include" . }}
-{{ end }}
+	
+
